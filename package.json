@@ -1,0 +1,21 @@
+{
+  "name": "auto-update-cli",
+  "version": "1.0.0",
+  "description": "CLI para automatizar atualização de repositórios",
+  "main": "src/index.js",
+  "bin": {
+    "auto-update": "./src/index.js"
+  },
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "inquirer": "^12.7.0",
+    "simple-git": "^3.28.0"
+  }
+}
