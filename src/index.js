@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-const chalk = require('chalk');
-const { askRepositories } = require('./cli/promptUser');
-const { updateRepo } = require('./core/repoManager');
+import chalk from 'chalk';
+import { askRepositories } from './cli/promptUser.js';
+import { updateRepo } from './core/repoManager.js';
+
 
 (async () => {
   console.log(chalk.cyan('🚀 Iniciando automação...\n'));

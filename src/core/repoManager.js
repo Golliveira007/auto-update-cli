@@ -1,10 +1,15 @@
-const path = require('path');
-const fs = require('fs');
-const simpleGit = require('simple-git');
-const { exec } = require('child_process');
-const inquirer = require('inquirer');
-const chalk = require('chalk');
-const { cloneRepo, prepareRepo, pushRepo } = require('./gitOperations');
+import path from 'path';
+import * as fs from 'fs';
+import simpleGit from 'simple-git';
+import { exec } from 'child_process';
+import inquirer from 'inquirer';
+import chalk from 'chalk';
+import { cloneRepo, prepareRepo, pushRepo } from './gitOperations.js';
+import { fileURLToPath } from 'url';
+
+
+const _filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(_filename);
 
 async function updateRepo({ cloneUrl, upstreamUrl, branch }) {
   const repoName = path.basename(cloneUrl, '.git');
@@ -39,4 +44,4 @@ async function updateRepo({ cloneUrl, upstreamUrl, branch }) {
   console.log(chalk.green(`✅ ${repoName} atualizado com sucesso!\n`));
 }
 
-module.exports = { updateRepo };
+export { updateRepo };

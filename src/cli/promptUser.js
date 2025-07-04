@@ -1,4 +1,5 @@
-const inquirer = require('inquirer');
+import inquirer from 'inquirer';
+
 
 async function askRepositories() {
   const repos = [];
@@ -22,4 +23,4 @@ async function askRepositories() {
   return repos;
 }
 
-module.exports = { askRepositories };
+export { askRepositories };
