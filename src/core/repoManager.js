@@ -4,16 +4,19 @@ import simpleGit from 'simple-git';
 import { exec } from 'child_process';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
-import { cloneRepo, prepareRepo, pushRepo } from './gitOperations.js';
-import { fileURLToPath } from 'url';
-
-
-const _filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(_filename);
+import { cloneRepo, prepareRepo, pushRepo, gitCommit } from './gitOperations.js';
+import os from 'os';
 
 async function updateRepo({ cloneUrl, upstreamUrl, branch }) {
   const repoName = path.basename(cloneUrl, '.git');
-  const repoDir = path.join(__dirname, '..', '..', repoName);
+  
+  const homeDir = os.homedir();
+  const repoBaseDir = path.join(homeDir, 'Downloads', 'repositories');
+  const repoDir = path.join(repoBaseDir, repoName);
+
+  if (!fs.existsSync(repoBaseDir)) {
+    fs.mkdirSync(repoBaseDir, { recursive: true });
+  }
 
   if (!fs.existsSync(repoDir)) {
     console.log(chalk.blue(`📦 Clonando ${repoName}...`));
@@ -21,7 +24,7 @@ async function updateRepo({ cloneUrl, upstreamUrl, branch }) {
   }
 
   const git = simpleGit(repoDir);
-  await git.cwd(repoDir);
+  
 
   console.log(chalk.yellow(`🔧 Atualizando ${repoName}...`));
 
@@ -38,6 +41,8 @@ async function updateRepo({ cloneUrl, upstreamUrl, branch }) {
         default: false
       }
     ]);
+
+    await gitCommit(git, repoDir);
   }
 
   await pushRepo(git);
