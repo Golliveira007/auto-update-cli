@@ -6,6 +6,7 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import { cloneRepo, prepareRepo, pushRepo, gitCommit } from './gitOperations.js';
 import os from 'os';
+import { execSync } from 'child_process';
 
 async function updateRepo({ cloneUrl, upstreamUrl, branch }) {
   const repoName = path.basename(cloneUrl, '.git');
